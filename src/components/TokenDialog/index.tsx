@@ -1,8 +1,8 @@
-import { Flex, Text, Dialog, TextField, Button } from '@radix-ui/themes'
+import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import { useState } from 'react'
 
-export function TokenDialog(props: { setToken: Function }) {
+export function TokenDialog(props: { setToken: (item: string) => void }) {
   const [token, inputToken] = useState('')
   return (
     <Dialog.Root open={true}>
