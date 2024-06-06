@@ -30,12 +30,6 @@ export default function StarCard() {
     }
   }, [setIsShow, setDismissStartCardDate, isCounting])
 
-  const onClickWantStar = useCallback(() => {
-    setIsCounting(true)
-    setDismissStartCardDate(new Date())
-    recordStarAction('star')
-  }, [setDismissStartCardDate])
-
   useEffect(() => {
     let countdownId: number
     if (isCounting && countdown > 0) {
@@ -50,44 +44,6 @@ export default function StarCard() {
 
     return () => clearInterval(countdownId)
   }, [isCounting, countdown, setIsShow])
-
-  const content = useMemo(() => {
-    return (
-      <>
-        {isCounting ? (
-          <div className="mt-6 flex w-full flex-col items-center gap-4">
-            <div className="flex max-w-full items-center text-sm">
-              <div className="flex h-7 min-w-[12rem] items-center justify-between rounded-full bg-gray-100 pl-5 text-black dark:bg-zinc-900 dark:text-white">
-                <div className="flex-0 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">{`${
-                  location.hostname
-                }${location.pathname.replace(/\/$/, '')}`}</div>
-                <IconStarOutline className="ml-4 mr-2 h-4 w-4 flex-shrink-0 text-neutral-400" />
-              </div>
-              <div className="flex flex-shrink-0 items-center">
-                <div className="ml-0.5">👈</div>
-                <IconStar className="h-4 w-4 text-indigo-600" />
-                <div className="ml-1 text-gray-600 dark:text-gray-300">点亮它！</div>
-              </div>
-            </div>
-            <span className="w-full text-center text-gray-600 dark:text-gray-300">
-              收藏快捷键<span className="ml-2 text-indigo-600 dark:text-indigo-500">{IS_MAC_OS ? '⌘' : 'Ctrl'} + D</span>
-            </span>
-          </div>
-        ) : (
-          <div className="flex pb-0 pt-6">
-            <button
-              className="rounded-lg bg-indigo-600 px-6 py-2 text-lg text-white transition-colors duration-300 focus:outline-none"
-              type="button"
-              onClick={onClickWantStar}
-              title="我想收藏"
-            >
-              我想收藏
-            </button>
-          </div>
-        )}
-      </>
-    )
-  }, [isCounting, onClickWantStar])
 
   return (
     <Transition
@@ -116,7 +72,6 @@ export default function StarCard() {
         <span className="pb-4 text-xl text-gray-600 dark:text-gray-50">
           坚持练习，提高语言能力。将 <span className="text-indigo-600">「Qwerty Learner」</span>保存到收藏夹，永不迷失！
         </span>
-        {content}
       </div>
     </Transition>
   )
