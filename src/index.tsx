@@ -48,7 +48,12 @@ function Root() {
           </Suspense>
         </BrowserRouter>
       ) : (
-        <TokenDialog setToken={setToken} />
+        <TokenDialog
+          setToken={(token) => {
+            localStorage.setItem('token', token)
+            setToken(token)
+          }}
+        />
       )}
     </React.StrictMode>
   )

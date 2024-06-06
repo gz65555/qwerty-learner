@@ -3400,17 +3400,21 @@ function fetchRemote() {
     .then((res) => res.data)
 }
 
-const result = await fetchRemote()
-result.fetcher = function wordListFetcher(url: string) {
-  return fetch(url, {
-    headers: {
-      Authorization: localStorage.getItem('token')!,
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => res.data.map((word: any) => word.data))
+try {
+  const result = await fetchRemote()
+  result.fetcher = function wordListFetcher(url: string) {
+    return fetch(url, {
+      headers: {
+        Authorization: localStorage.getItem('token')!,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => res.data.map((word: any) => word.data))
+  }
+  dictionaryResources.push(result)
+} catch (e) {
+  console.error(e)
 }
-dictionaryResources.push(result)
 
 export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
   ...resource,

@@ -42,10 +42,15 @@ export function useWordList(): UseWordListResult {
     } else if (isReviewMode) {
       newWords = reviewRecord?.words ?? []
     } else if (wordList) {
-      newWords = wordList.slice(currentChapter * CHAPTER_LENGTH, (currentChapter + 1) * CHAPTER_LENGTH)
+      console.log(currentChapter * CHAPTER_LENGTH, (currentChapter + 1) * CHAPTER_LENGTH)
+      newWords = wordList
     } else {
       newWords = []
     }
+
+    console.log('isReviewMode', isReviewMode)
+    console.log('wordList', wordList)
+    console.log('newWords', newWords)
 
     // 记录原始 index, 并对 word.trans 做兜底处理
     return newWords.map((word, index) => {
