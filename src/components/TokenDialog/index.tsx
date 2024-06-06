@@ -1,5 +1,4 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
-import '@radix-ui/themes/styles.css'
 import { useState } from 'react'
 
 export function TokenDialog(props: { setToken: (item: string) => void }) {

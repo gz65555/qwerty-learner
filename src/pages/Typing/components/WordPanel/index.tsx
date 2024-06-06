@@ -134,6 +134,14 @@ export default function WordPanel() {
     { enableOnFormTags: true, preventDefault: true },
     [],
   )
+  useHotkeys(
+    'Meta + K',
+    () => {
+      window.open(`https://www.youdao.com/result?word=${currentWord.name}&lang=en`)
+    },
+    { enableOnFormTags: true, preventDefault: true },
+    [currentWord.name],
+  )
 
   useHotkeys(
     'tab',
@@ -183,7 +191,7 @@ export default function WordPanel() {
           </div>
         )}
       </div>
-      <Progress className={`mb-10 mt-auto ${state.isTyping ? 'opacity-100' : 'opacity-0'}`} />
+      {/* <Progress className={`mb-10 mt-auto ${state.isTyping ? 'opacity-100' : 'opacity-0'}`} /> */}
     </div>
   )
 }

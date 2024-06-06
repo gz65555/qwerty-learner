@@ -19,6 +19,7 @@ import { currentChapterAtom, currentDictIdAtom, isReviewModeAtom, randomConfigAt
 import { IsDesktop, isLegal } from '@/utils'
 import { useSaveChapterRecord } from '@/utils/db'
 import { useMixPanelChapterLogUploader } from '@/utils/mixpanel'
+import '@radix-ui/themes/styles.css'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import type React from 'react'
 import { useCallback, useEffect, useState } from 'react'
@@ -163,7 +164,7 @@ const App: React.FC = () => {
                 !state.isFinished && <WordPanel />
               )}
             </div>
-            <Speed />
+            {/* <Speed /> */}
           </div>
         </div>
       </Layout>
