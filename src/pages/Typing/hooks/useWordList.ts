@@ -26,7 +26,14 @@ export function useWordList(): UseWordListResult {
   }
 
   const isFirstChapter = !isReviewMode && currentDictInfo.id === 'cet4' && currentChapter === 0
-  const { data: wordList, error, isLoading } = useSWR(currentDictInfo.url, wordListFetcher)
+  const {
+    data: wordList,
+    error,
+    isLoading,
+  } = useSWR(
+    `${currentDictInfo.url}?page=${currentChapter}&count=${CHAPTER_LENGTH}`,
+    currentDictInfo.fetcher ? currentDictInfo.fetcher : wordListFetcher,
+  )
 
   const words: WordWithIndex[] = useMemo(() => {
     let newWords: Word[]

@@ -28,6 +28,7 @@ export type Dictionary = {
   chapterCount: number
   //override default pronunciation when not undefined
   defaultPronIndex?: number
+  fetcher?: any
 }
 
 export type PronunciationConfig = {

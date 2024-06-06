@@ -1,4 +1,5 @@
 import Loading from './components/Loading'
+import { TokenDialog } from './components/TokenDialog'
 import './index.css'
 import { ErrorBook } from './pages/ErrorBook'
 import TypingPage from './pages/Typing'
@@ -30,19 +31,25 @@ function Root() {
     darkMode ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
   }, [darkMode])
 
+  const [token, setToken] = React.useState<string>(localStorage.getItem('token') ?? '')
+
   return (
     <React.StrictMode>
-      <BrowserRouter basename={REACT_APP_DEPLOY_ENV === 'pages' ? '/qwerty-learner' : ''}>
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route index element={<TypingPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/analysis" element={<AnalysisPage />} />
-            <Route path="/error-book" element={<ErrorBook />} />
-            <Route path="/*" element={<Navigate to="/" />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      {token ? (
+        <BrowserRouter basename={REACT_APP_DEPLOY_ENV === 'pages' ? '/qwerty-learner' : ''}>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route index element={<TypingPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/analysis" element={<AnalysisPage />} />
+              <Route path="/error-book" element={<ErrorBook />} />
+              <Route path="/*" element={<Navigate to="/" />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      ) : (
+        <TokenDialog setToken={setToken} />
+      )}
     </React.StrictMode>
   )
 }

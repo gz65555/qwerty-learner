@@ -3385,6 +3385,33 @@ export const dictionaryResources: DictionaryResource[] = [
   // },
 ]
 
+function fetchRemote() {
+  const host = import.meta.env.VITE_HOST
+  // console.log(import.meta.env)
+  // const host = 'http://localhost:3000'
+
+  return fetch(`${host}/api/english/dicinfo`, {
+    method: 'GET',
+    headers: {
+      Authorization: localStorage.getItem('token')!,
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => res.data)
+}
+
+const result = await fetchRemote()
+result.fetcher = function wordListFetcher(url: string) {
+  return fetch(url, {
+    headers: {
+      Authorization: localStorage.getItem('token')!,
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => res.data.map((word: any) => word.data))
+}
+dictionaryResources.push(result)
+
 export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),

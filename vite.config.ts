@@ -10,6 +10,7 @@ import { defineConfig } from 'vite'
 import type { PluginOption } from 'vite'
 
 // https://vitejs.dev/config/
+// @ts-ignore
 export default defineConfig(async ({ mode }) => {
   const latestCommitHash = await new Promise<string>((resolve) => {
     return getLastCommit((err, commit) => (err ? 'unknown' : resolve(commit.shortHash)))
@@ -31,6 +32,7 @@ export default defineConfig(async ({ mode }) => {
     build: {
       minify: true,
       outDir: 'build',
+      target: ['es2022'],
       sourcemap: false,
     },
     esbuild: {
