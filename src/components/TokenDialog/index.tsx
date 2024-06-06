@@ -22,7 +22,9 @@ export function TokenDialog(props: { setToken: (item: string) => void }) {
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button onClick={() => props.setToken(token)}>Save</Button>
+            <Button style={{ backgroundColor: 'rgb(60, 87, 274)' }} onClick={() => props.setToken(token)}>
+              Save
+            </Button>
           </Dialog.Close>
         </Flex>
       </Dialog.Content>
