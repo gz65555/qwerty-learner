@@ -140,7 +140,7 @@ export default function WordPanel() {
       window.open(`https://www.youdao.com/result?word=${currentWord.name}&lang=en`)
     },
     { enableOnFormTags: true, preventDefault: true },
-    [currentWord.name],
+    [currentWord?.name],
   )
 
   useHotkeys(
